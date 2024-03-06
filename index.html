@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 style="text-align: center;color:violet">Find out the weather of the city</h1>
+    <form style="display: flex;justify-content: center;">
+        <input type="text" placeholder="Enter city Name">
+        <br>
+        <br>
+        <input type="submit">
+    </form>
+
+    <script>
+         var kp=document.createElement("h1")
+         var kpp=document.createElement("h1")
+         document.body.appendChild(kpp)
+        var f=document.forms;
+        f[0].addEventListener("submit",function(e){
+            e.preventDefault();
+            var enter=e.target[0].value;
+            var start='https://api.openweathermap.org/data/2.5/weather?q=';
+            var end='&appid=3ae3ec8027edb0aa4fc8d8722e99a1f3';
+            var api=start+enter+end;
+            fetch(api,
+            {method:'get'}).then((val)=>{
+                return val.json()
+            }).then((val)=>{
+                console.log(val)
+                // var kp=document.createElement("h1")
+        document.body.appendChild(kp);
+        temp=parseInt((val["main"]["temp"])-273.15);
+        if(temp>25){
+                        kp.style.backgroundImage="url('./summer.jpeg')";
+                        kp.style.backgroundSize= "cover";
+                        kp.style.backgroundrepeat= "no-repeat";
+                        kp.style.width= "900px";
+                        kp.style.height= "900px";
+                        kp.style.color="red"
+        }
+        kp.innerHTML=temp+"<sup>0</sup>c"
+        // kpp.innerHTML=(val["name"]);
+         if(temp<=25){
+            kp.style.backgroundImage="url('./snow2.jpeg')";
+                        kp.style.backgroundSize= "cover";
+                        kp.style.backgroundrepeat= "no-repeat";
+                        kp.style.width= "900px";
+                        kp.style.height= "900px";
+                        kp.style.color="darkblue"
+         }
+         kp.innerHTML=temp+"<sup>0</sup>c"
+        
+             
+            })
+           
+        })
+  
+      
+    </script>
+</body>
+</html>
